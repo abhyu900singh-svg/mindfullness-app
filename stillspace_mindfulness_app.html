@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stillspace — Your Mindful Moment</title>
+<style>
+:root{--ink:#243b36;--muted:#71817a;--cream:#f7f6ef;--paper:#fffefa;--green:#527b69;--sage:#dce9df;--peach:#f3dfcf;--line:#e8e9df;--shadow:0 18px 50px rgba(39,67,55,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:28px 24px 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:46px}.brand{font-weight:800;letter-spacing:-.7px;font-size:22px}.brand span{color:var(--green)}.date{font-size:13px;color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:stretch}.welcome{padding:34px 0}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800;color:var(--green)}h1{font-family:Georgia,serif;font-size:clamp(38px,5vw,60px);font-weight:500;line-height:1.05;letter-spacing:-1.7px;margin:16px 0}.welcome p{max-width:490px;color:var(--muted);line-height:1.7;font-size:15px}.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.checkin{padding:26px}.card h2{font-family:Georgia,serif;font-weight:500;font-size:25px;margin:0 0 8px}.sub{font-size:13px;color:var(--muted);margin:0 0 20px}.moods{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.mood{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px 3px;cursor:pointer;color:var(--ink);font-size:11px;transition:.2s}.mood b{display:block;font-size:23px;margin-bottom:6px}.mood.active{background:var(--sage);border-color:#9ebaa8;transform:translateY(-2px)}.recommend{margin-top:18px;background:#f2f5ed;border-radius:15px;padding:15px;font-size:13px;line-height:1.55;color:#53665b;display:none}.recommend strong{color:var(--ink)}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:28px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.section-head h2{font-family:Georgia,serif;font-size:26px;font-weight:500;margin:0}.small-link{font-size:12px;color:var(--green);font-weight:700}.practice{padding:24px}.practice-main{display:flex;gap:20px;align-items:center}.orb{width:116px;height:116px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f8e7d5,#b9d0bd 65%,#8eae9a);display:grid;place-items:center;color:#355346;font-family:Georgia,serif;font-size:16px}.practice h3{font-family:Georgia,serif;font-weight:500;font-size:22px;margin:0 0 7px}.practice p{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 14px}.btn{border:0;background:var(--green);color:white;padding:11px 17px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer}.btn:hover{background:#3e6654}.secondary{background:#edf2eb;color:var(--green)}.secondary:hover{background:#dfe9df}.side-stack{display:grid;gap:22px}.goal{padding:23px}.goal-row{display:flex;justify-content:space-between;align-items:center}.goal h3{font-family:Georgia,serif;font-size:22px;font-weight:500;margin:0}.goal p{font-size:13px;color:var(--muted)}.progress{height:8px;background:#edf0e9;border-radius:20px;overflow:hidden;margin:17px 0 10px}.bar{height:100%;width:0;background:#7eaa8c;border-radius:20px;transition:.4s}.goal-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.journal{padding:23px}.journal textarea{width:100%;min-height:86px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:12px;font:13px inherit;color:var(--ink);background:#fffefa;outline:none}.journal textarea:focus{border-color:#9ebaa8}.journal .btn{margin-top:10px}.quote{margin-top:28px;padding:25px 30px;border-radius:20px;background:var(--peach);font-family:Georgia,serif;font-size:21px;line-height:1.4;text-align:center;color:#5e5148}.quote small{display:block;font:11px system-ui;color:#88766a;margin-top:9px;letter-spacing:1px;text-transform:uppercase}
+.modal{position:fixed;inset:0;background:rgba(26,42,35,.48);display:none;place-items:center;padding:20px;z-index:5}.modal.show{display:grid}.modal-box{background:var(--paper);border-radius:24px;padding:30px;max-width:430px;width:100%;text-align:center;box-shadow:var(--shadow)}.modal-box h2{font:500 29px Georgia;margin:0 0 8px}.breath-circle{width:160px;height:160px;margin:24px auto;border-radius:50%;background:radial-gradient(circle,#dce9df,#a9c5b1);display:grid;place-items:center;font:20px Georgia;transition:transform 4s ease-in-out}.breath-circle.inhale{transform:scale(1.22)}.breath-circle.exhale{transform:scale(.82)}.modal-box p{color:var(--muted);font-size:13px}.close{margin-top:10px}
+@media(max-width:760px){.hero,.grid{grid-template-columns:1fr}.welcome{padding:10px 0}.top{margin-bottom:25px}.moods{gap:5px}.mood{font-size:10px}.practice-main{align-items:flex-start}.orb{width:90px;height:90px}.quote{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand">still<span>space</span> ✳</div><div class="date" id="today"></div></header>
+  <section class="hero">
+    <div class="welcome">
+      <div class="eyebrow">A little space for yourself</div>
+      <h1>Make room for<br>how you feel.</h1>
+      <p>No pressure to be perfectly calm. Just take a moment, check in with yourself, and choose one small practice that feels right today.</p>
+    </div>
+    <div class="card checkin">
+      <h2>How are you arriving today?</h2>
+      <p class="sub">Choose the feeling that comes closest. There is no wrong answer.</p>
+      <div class="moods">
+        <button class="mood" data-mood="low"><b>🌧️</b>Low</button>
+        <button class="mood" data-mood="tense"><b>🌪️</b>Tense</button>
+        <button class="mood" data-mood="okay"><b>☁️</b>Okay</button>
+        <button class="mood" data-mood="good"><b>🌤️</b>Good</button>
+        <button class="mood" data-mood="bright"><b>☀️</b>Bright</button>
+      </div>
+      <div class="recommend" id="recommend"></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div>
+      <div class="section-head"><h2>Today's gentle practice</h2><span class="small-link">3–5 minutes</span></div>
+      <div class="card practice">
+        <div class="practice-main">
+          <div class="orb">Breathe<br>slowly</div>
+          <div><h3>Come back to the present</h3><p>A simple guided breathing pause. Let your shoulders soften and follow a comfortable rhythm. You can stop whenever you like.</p><button class="btn" id="startBreath">Start breathing</button></div>
+        </div>
+      </div>
+      <div class="quote">“You do not have to do everything today. Just begin with this moment.”<small>A reminder for today</small></div>
+    </div>
+    <div class="side-stack">
+      <div class="card goal">
+        <div class="goal-row"><h3>Your small goal</h3><span>🌱</span></div>
+        <p>Build a mindful moment into your day.</p>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+        <div class="goal-foot"><span id="goalText">0 of 1 mindful moments</span><span>Today's progress</span></div>
+        <button class="btn secondary" id="complete">Mark today's moment complete</button>
+      </div>
+      <div class="card journal">
+        <h3 style="font:500 23px Georgia;margin:0 0 7px">A thought to leave here</h3>
+        <p class="sub">Write one sentence about what is on your mind. It stays in this page while it is open.</p>
+        <textarea id="thought" placeholder="Right now, I am noticing..."></textarea>
+        <button class="btn secondary" id="saveThought">Save my reflection</button>
+        <p id="saved" style="font-size:12px;color:var(--green);margin:9px 0 0"></p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2>A moment to breathe</h2><p>Keep the breath gentle and comfortable. No need to force or hold it.</p>
+    <div class="breath-circle" id="breathCircle">Ready?</div>
+    <p id="breathText">When you're ready, begin.</p>
+    <button class="btn" id="begin">Begin</button>
+    <button class="btn secondary close" id="close">Close</button>
+  </div>
+</div>
+<script>
+const today = new Date();
+document.getElementById('today').textContent = today.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+const suggestions = {
+ low:['Go gently. Try a grounding pause: notice three things around you, two sounds, and one thing supporting you.','A short grounding practice'],
+ tense:['You might like a slow breathing pause. Let each exhale be unhurried; return to your normal breath if anything feels uncomfortable.','A calming breathing pause'],
+ okay:['A few quiet minutes can help you notice what is already here. Try the breathing practice below.','A mindful check-in'],
+ good:['Enjoy the feeling without needing to hold on to it. Take a moment to notice what is going well.','A gratitude moment'],
+ bright:['Bring some of that energy into the present. Choose one intention for the rest of your day.','Set a gentle intention']
+};
+document.querySelectorAll('.mood').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.mood').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+ const [message,label]=suggestions[btn.dataset.mood];const box=document.getElementById('recommend');
+ box.innerHTML='<strong>'+label+'</strong><br>'+message;box.style.display='block';
+}));
+let completed=false;
+document.getElementById('complete').addEventListener('click',()=>{
+ completed=!completed;document.getElementById('bar').style.width=completed?'100%':'0%';
+ document.getElementById('goalText').textContent=completed?'1 of 1 mindful moments':'0 of 1 mindful moments';
+ document.getElementById('complete').textContent=completed?'Completed ✓ — undo':'Mark today’s moment complete';
+});
+document.getElementById('saveThought').addEventListener('click',()=>{
+ const value=document.getElementById('thought').value.trim();
+ document.getElementById('saved').textContent=value?'Reflection saved on this page.':'Write a thought first, if you feel like it.';
+});
+const modal=document.getElementById('modal'), circle=document.getElementById('breathCircle'), breathText=document.getElementById('breathText');
+let timer=null,step=0,running=false;
+document.getElementById('startBreath').onclick=()=>modal.classList.add('show');
+document.getElementById('close').onclick=()=>{modal.classList.remove('show');clearInterval(timer);running=false;circle.className='breath-circle';circle.textContent='Ready?';breathText.textContent='When you’re ready, begin.';document.getElementById('begin').textContent='Begin';};
+document.getElementById('begin').onclick=()=>{
+ if(running){clearInterval(timer);running=false;circle.className='breath-circle';circle.textContent='Paused';breathText.textContent='Take your time.';document.getElementById('begin').textContent='Begin again';return;}
+ running=true;step=0;document.getElementById('begin').textContent='Pause';
+ const phases=[['Breathe in gently','inhale',4],['Breathe out slowly','exhale',5]];
+ function tick(){const p=phases[step%2];circle.className='breath-circle '+p[1];circle.textContent=p[1]==='inhale'?'In':'Out';breathText.textContent=p[0]+' · for '+p[2]+' seconds';step++;}
+ tick();timer=setInterval(tick,4500);
+};
+</script>
+</body>
+</html>
